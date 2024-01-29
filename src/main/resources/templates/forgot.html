@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forgot</title>
+</head>
+<body>
+
+<form th:action="@{/forgot}" method="post">
+  <p th:text="${error}" style="color: red">Error</p>
+  <input type="email" name="email" placeholder="Email">
+  <div>
+    <button type="submit">Reset</button>
+  </div>
+
+</form>
+</body>
+</html>

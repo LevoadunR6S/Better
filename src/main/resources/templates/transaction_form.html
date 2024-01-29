@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+<div>
+    <button onclick="window.location.href='/home/acc/transaction/delete'">Delete</button>
+    <button onclick="window.location.href='/home/acc/transaction/add'">Add</button>
+    <button onclick="window.location.href='/home/acc'">Back</button>
+</div>
+<br>
+<p th:text="${transaction}">Текст за замовчуванням</p>
+<form method="post" th:action="@{/home/acc/transaction}">
+    <label for="category">Filter:</label>
+    <select id="category" name="category">
+        <option value="Food">Food</option>
+        <option value="Utilities">Utilities</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Shopping">Shopping</option>
+        <option value="None">None</option>
+    </select>
+    <label for="sortBy">Sort By:</label>
+    <select id="sortBy" name="sortBy">
+        <option value="date">Date</option>
+        <option value="amount">Amount</option>
+    </select>
+
+    <button type="submit">Filter</button>
+</form>
+<br>
+<div>
+    <table>
+    <tr th:each="transaction : ${transactions}">
+        <div class="transaction-item">
+            <div class="delete-button">
+                <a th:href="'/home/acc/transaction/delete/' + ${transaction.getId()}">
+                    <button type="button" class="btn btn-danger">⨉</button>
+                </a>
+            </div>
+            <div class="transaction-details">
+                <h3 class="category" th:text="${transaction.getCategory()}">Category</h3>
+                <h3 class="date" th:text="${transaction.getDate()}">Date</h3>
+                <p class="description" th:text="${transaction.getDescription()}">Description</p>
+                <h3 class="amount" th:text="${transaction.getAmount()}">Amount</h3>
+                <h3 class="client" th:text="${transaction.getClient().getName()}">Client</h3>
+                <h3 class="supplier" th:text="${transaction.getSupplier().getName()}">Supplier</h3>
+            </div>
+        </div>
+        <hr class="transaction-divider">
+    </tr>
+    </table>
+</div>
+
+
+</body>
+</html>
