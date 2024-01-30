@@ -1,8 +1,11 @@
 package com.pet.Better.controllers;
 
 import com.pet.Better.model.Accountant;
+import com.pet.Better.model.RegularTransaction;
+import com.pet.Better.model.Transaction;
 import com.pet.Better.service.AccountantService;
 import com.pet.Better.service.MailService;
+import com.pet.Better.service.TransactionService;
 import com.pet.Better.service.Utility;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -26,6 +30,9 @@ public class MainController {
 
     @Autowired
     MailService mailService;
+
+    @Autowired
+    TransactionService transactionService;
 
 
     @GetMapping("/signup")
@@ -51,6 +58,20 @@ public class MainController {
     @GetMapping("/home/acc")
     public String account() {
         return "account";
+    }
+
+    @GetMapping("/home/acc/info")
+    public String showStatistic(Model model){
+        List<Transaction> transactions = transactionService.getAllTransactions();
+        Long sum = 0L;
+        for (Transaction transaction: transactions){
+            sum+=transaction.getAmount();
+        }
+        model.addAttribute("sum", sum);
+        model.addAttribute("count", transactions.size());
+        model.addAttribute("avg", sum/transactions.size());
+        model.addAttribute("regularCount",transactions.stream().filter(RegularTransaction.class::isInstance).toList().size());
+        return "info";
     }
 
     @GetMapping("/forgot")

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Info</title>
+</head>
+<body>
+<h3 th:text="'Balance: ' + ${sum}">Balance</h3>
+<h3 th:text="'Count: ' + ${count}">Transaction count</h3>
+<h3 th:text="'Average: ' + ${avg}">Average amount</h3>
+<h3 th:text="'Regular transactions: ' + ${regularCount}">Regular transaction count</h3>
+</body>
+</html>

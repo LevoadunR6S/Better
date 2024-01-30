@@ -68,7 +68,6 @@ public class TransactionService {
                     description,
                     LocalDateTime.parse(dateTime)
             );
-            startRegularTransactions();
         }
         else {
             createOneTimeTransaction(client,

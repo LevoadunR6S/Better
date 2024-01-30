@@ -4,6 +4,7 @@ import com.pet.Better.model.ROLE;
 import com.pet.Better.model.Accountant;
 import com.pet.Better.repository.AccountantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -18,6 +19,7 @@ public class AccountantService {
         accountant.setResetPasswordToken(token);
         accountantRepository.save(accountant);
     }
+
 
     public void createAccountant(Accountant accountant){
         accountant.setRoles(Collections.singleton(ROLE.ACCOUNTANT));

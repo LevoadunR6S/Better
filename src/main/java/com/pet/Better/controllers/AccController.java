@@ -1,9 +1,6 @@
 package com.pet.Better.controllers;
 
-import com.pet.Better.model.Client;
-import com.pet.Better.model.OneTimeTransaction;
-import com.pet.Better.model.Supplier;
-import com.pet.Better.model.Transaction;
+import com.pet.Better.model.*;
 import com.pet.Better.service.ClientService;
 import com.pet.Better.service.SupplierService;
 import com.pet.Better.service.TransactionService;
@@ -74,7 +71,6 @@ public class AccController {
                                      @RequestParam String dateTime) {
 
         transactionService.createTransaction(client, supplier, amount, category, description, regular, dateTime);
-
         return "redirect:/home/acc/transaction";
     }
 
